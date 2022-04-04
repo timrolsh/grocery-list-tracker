@@ -32,3 +32,9 @@ body {
 #table_body {
     font-size: 20px;
 }
+
+#modify_list_divider {
+    margin: 20px;
+    color: black;
+    border: 2px solid black;
+}
