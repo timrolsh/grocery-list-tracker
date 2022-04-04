@@ -14,15 +14,9 @@
     </head>
 
     <body>
-        <h1 class="mainHeader">Tim's Grocery List Tracker</h1>
-        <!-- TODO add hyperlinks to "Modify List" and "View List" and "Home"-->
         <div class="container">
+            <h1 class="mainHeader">Tim's Grocery List Tracker</h1>
             <div class="row">
-                <a
-                    class="waves-effect waves-light btn-large col s4 buttonColor"
-                    href="useList.html"
-                    >Use List</a
-                >
                 <a
                     class="waves-effect waves-light btn-large col s4 buttonColor"
                     href="index.html"
@@ -30,21 +24,29 @@
                 >
                 <a
                     class="waves-effect waves-light btn-large col s4 buttonColor"
+                    href="useList.html"
+                    >Use List</a
+                >
+                <a
+                    class="waves-effect waves-light btn-large col s4 buttonColor"
                     href="modifyList.html"
                     >Modify List</a
                 >
             </div>
+            <div class = "row">
+                <p id="homeScreenText">
+                    Welcome to my grocery list tracker! Make a grocery list by going
+                    to "Modify List" and adding some items!<br />
+                    Then, go to the "Use List" page to start checking stuff off that
+                    you've put in your cart.<br />
+                    Happy shopping!
+                </p>
+                <div class = "col offset-s3">
+                    <img src = "images/shoppingCart.png">
+                </div>
+            </div>
         </div>
 
-        <div>
-            <p id="homeScreenText">
-                Welcome to my grocery list tracker! Make a grocery list by going
-                to "Modify List" and adding some items!<br />
-                Then, go to the "Use List" page to start checking stuff off that
-                you've put in your cart.<br />
-                Happy shopping!
-            </p>
-        </div>
     </body>
 
     <!-- materialize stuff -->
