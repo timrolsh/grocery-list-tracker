@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Grocery List Tracker - Use List</title>
+        <title>Grocery List Tracker - Modify List</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -19,17 +19,17 @@
             <div class="row">
                 <a
                     class="waves-effect waves-light btn-large col s4 buttonColor"
-                    href="index.html"
+                    href="/"
                     >Home</a
                 >
                 <a
                     class="waves-effect waves-light btn-large col s4 buttonColor"
-                    href="useList.html"
+                    href="/useList"
                     >Use List</a
                 >
                 <a
                     class="waves-effect waves-light btn-large col s4 buttonColor"
-                    href="modifyList.html"
+                    href="/modifyList"
                     >Modify List</a
                 >
             </div>
@@ -47,18 +47,22 @@
                 <!-- getting error here, idk why -->
                 <tbody id="list_table_body"></tbody>
             </table>
+            <hr id="modify_list_divider" />
+            <div class="row">
+                <input
+                    placeholder="Enter item here "
+                    id="add_item_text"
+                    type="text"
+                    class="validate col s9"
+                />
+                <a class="waves-effect waves-light btn col s3">Add item</a>
+            </div>
         </div>
     </body>
 
     <!-- materialize stuff -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/materialize.min.css" />
+    <script src="javascripts/materialize.min.js"></script>
     <!-- my own css -->
-    <link rel="stylesheet" href="myCSS.css" />
-
-    <!-- run javascript file to populate table with data -->
-    <script src = "writeList.js"></script>
+    <link rel="stylesheet" href="/stylesheets/myCSS.css" />
 </html>

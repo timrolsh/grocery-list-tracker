@@ -1,0 +1,23 @@
+{
+    "name": "grocery-list-tracker",
+    "version": "1.0.0",
+    "description": "A website that makes it really easy to make a grocery list and check stuff off while you are at the grocery store!",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/timrolsh/grocery-list-tracker.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/timrolsh/grocery-list-tracker/issues"
+    },
+    "homepage": "https://github.com/timrolsh/grocery-list-tracker#readme",
+    "dependencies": {
+        "express": "^4.17.3",
+        "morgan": "^1.10.0"
+    }
+}
