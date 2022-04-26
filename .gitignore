@@ -4,3 +4,6 @@
 
 # nodejs stuff
 node_modules
+
+#env files
+.env

@@ -17,7 +17,10 @@
     },
     "homepage": "https://github.com/timrolsh/grocery-list-tracker#readme",
     "dependencies": {
+        "dotenv": "^16.0.0",
         "express": "^4.17.3",
-        "morgan": "^1.10.0"
+        "fs": "^0.0.1-security",
+        "morgan": "^1.10.0",
+        "mysql2": "^2.3.3"
     }
 }
