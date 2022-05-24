@@ -1,8 +1,6 @@
 const db = require("./db_connection");
 const fs = require("fs");
 
-
-
 // reset database if there is already something in there
 db.execute(
     fs.readFileSync(__dirname + "/queries/clear_table.sql", {
@@ -54,7 +52,6 @@ db.execute(
     }),
     ["Chips(large pack)", "1"]
 );
-
 
 // query database for all elements
 db.execute(
