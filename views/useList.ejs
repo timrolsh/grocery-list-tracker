@@ -37,23 +37,23 @@
             <table class="highlight centered" id="table_body">
                 <thead>
                     <tr class="row table_header">
-                        <th class="col s4">Item Name</th>
-                        <th class="col s4">Item Count</th>
-                        <th class="col s4">In Shopping Cart</th>
+                        <th class="col s4" style="padding: 12px;">Item Name</th>
+                        <th class="col s4" style="padding: 12px;">Item Count</th>
+                        <th class="col s4" style="padding: 12px;">In Shopping Cart</th>
                     </tr>
                 </thead>
                 <tbody id="list_table_body">
                     <!-- add the rows of the table in here. Each row has 3 columns, each column is the item name, the item count, and whether the item is in the list or not  -->
                     <% for (let item of groceryList) { %>
                     <tr class="row">
-                        <td class="col s4"><%= item.item_name %></td>
-                        <td class="col s4"><%= item.item_count %></td>
+                        <td class="col s4" style="padding: 12px;"><%= item.item_name %></td>
+                        <td class="col s4" style="padding: 12px;"><%= item.item_count %></td>
                         <!-- don't display the number 1 or 0, display yes or no -->
                         <!-- TODO make these buttons that user can click to flip them back and forth from yes or no, and every time button is clicked, update value in database -->
                         <% if (item.item_in_cart == 1) { %>
-                        <td class="col s4">Yes</td>
+                        <td class="col s4" style="padding: 12px;">Yes</td>
                         <% } else { %>
-                        <td class="col s4">No</td>
+                        <td class="col s4" style="padding: 12px;">No</td>
                         <% } %>
                     </tr>
                     <% } %>
