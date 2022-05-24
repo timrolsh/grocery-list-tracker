@@ -1,5 +1,5 @@
 const mysql = require("mysql2");
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config();
 
 const dbConfig = {
@@ -8,7 +8,7 @@ const dbConfig = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    connectTimeout: parseInt(process.env.DB_CONNECT_TIMEOUT || "10000")
+    connectTimeout: parseInt(process.env.DB_CONNECT_TIMEOUT || "10000"),
 };
 
 const connection = mysql.createConnection(dbConfig);

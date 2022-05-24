@@ -38,3 +38,11 @@ body {
     color: black;
     border: 2px solid black;
 }
+
+.no-button-color {
+    background-color: rgb(215, 61, 33);
+}
+
+.yes-button-color {
+    background-color: rgb(29, 143, 43);
+}
