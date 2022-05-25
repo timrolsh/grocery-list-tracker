@@ -58,15 +58,21 @@
                         <!-- TODO make these buttons that user can click to flip them back and forth from yes or no, and every time button is clicked, update value in database -->
                         <% if (item.item_in_cart == 1) { %>
                         <td
-                            class="col s4 yes-button-color"
-                            style="padding: 12px"
+                            class="col s4 yes-no-button"
+                            style="
+                                padding: 12px;
+                                background-color: rgb(29, 143, 43);
+                            "
                         >
                             Yes
                         </td>
                         <% } else { %>
                         <td
-                            class="col s4 no-button-color"
-                            style="padding: 12px"
+                            class="col s4 yes-no-button"
+                            style="
+                                padding: 12px;
+                                background-color: rgb(215, 61, 33);
+                            "
                         >
                             No
                         </td>
@@ -77,6 +83,23 @@
             </table>
         </div>
     </body>
+    <!-- front end javascript to handle flipping the colors of the buttons and changing their texts when they care clicked on -->
+    <script>
+        for (let i of document.getElementsByClassName("yes-no-button")) {
+            i.addEventListener("click", () => {
+                // if the button is green, change the color to red and set the text to no
+                if (i.style.backgroundColor == "rgb(29, 143, 43)") {
+                    i.style.backgroundColor = "rgb(215, 61, 33)";
+                    i.innerHTML = "No";
+                }
+                // otherwise, the button must be red, change the color to green and set the text to yes
+                else {
+                    i.style.backgroundColor = "rgb(29, 143, 43)";
+                    i.innerHTML = "Yes";
+                }
+            });
+        }
+    </script>
 
     <!-- materialize stuff -->
     <link rel="stylesheet" href="stylesheets/materialize.min.css" />
