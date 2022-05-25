@@ -20,6 +20,7 @@
     },
     "homepage": "https://github.com/timrolsh/grocery-list-tracker#readme",
     "dependencies": {
+        "body-parser": "^1.20.0",
         "dotenv": "^16.0.0",
         "ejs": "^3.1.8",
         "express": "^4.17.3",

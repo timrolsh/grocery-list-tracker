@@ -12,6 +12,8 @@ app.set("view engine", "ejs");
 app.use(logger("dev"));
 app.use(express.static(__dirname + "/public"));
 
+app.use(express.urlencoded({ extended: false }));
+
 app.get("/", (req, res) => {
     res.render("index");
 });
@@ -31,6 +33,19 @@ app.get("/useList", (req, res) => {
             }
         }
     );
+});
+
+// app.post("/useList/item-in-cart", (req, res) => {
+//     db.execute(
+//         fs.readFileSync(__dirname + "/db/queries/change_item_in_cart.sql", {
+//             encoding: "UTF-8",
+//         }),
+//         [req.body.setTo, req.body.id]
+//     );
+// });
+
+app.post("/useList/item-in-cart", (req, res) => {
+    console.log(req.body);
 });
 
 app.listen(port, () => {

@@ -47,7 +47,7 @@
                 <tbody id="list_table_body">
                     <!-- add the rows of the table in here. Each row has 3 columns, each column is the item name, the item count, and whether the item is in the list or not  -->
                     <% for (let item of groceryList) { %>
-                    <tr class="row" id="<%= item.item_id %>">
+                    <tr class="row" id="row<%= item.item_id %>">
                         <td class="col s4" style="padding: 12px">
                             <%= item.item_name %>
                         </td>
@@ -63,8 +63,10 @@
                                 padding: 12px;
                                 background-color: rgb(29, 143, 43);
                             "
+                            id="<%= item.item_id %>"
                         >
                             Yes
+                            <a href=""></a>
                         </td>
                         <% } else { %>
                         <td
@@ -73,6 +75,7 @@
                                 padding: 12px;
                                 background-color: rgb(215, 61, 33);
                             "
+                            id="<%= item.item_id %>"
                         >
                             No
                         </td>
@@ -87,6 +90,7 @@
     <script>
         for (let i of document.getElementsByClassName("yes-no-button")) {
             i.addEventListener("click", () => {
+                let yes = false;
                 // if the button is green, change the color to red and set the text to no
                 if (i.style.backgroundColor == "rgb(29, 143, 43)") {
                     i.style.backgroundColor = "rgb(215, 61, 33)";
@@ -96,7 +100,32 @@
                 else {
                     i.style.backgroundColor = "rgb(29, 143, 43)";
                     i.innerHTML = "Yes";
+                    yes = true;
                 }
+
+                // make sure to use JSON.stringify with this
+                let requestBody;
+                if (yes) {
+                    requestBody = {
+                        charset: "UTF-8",
+                        setTo: 1,
+                        id: i.id,
+                    };
+                } else {
+                    requestBody = {
+                        charset: "UTF-8",
+                        setTo: 0,
+                        id: i.id,
+                    };
+                }
+
+                fetch(document.URL + "/item-in-cart", {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                    body: JSON.stringify(requestBody),
+                });
             });
         }
     </script>
