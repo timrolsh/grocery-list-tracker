@@ -38,3 +38,11 @@ body {
     color: black;
     border: 2px solid black;
 }
+
+#reset_all_button {
+    padding: 2px;
+    background-color: rgb(214, 49, 49);
+    font-size: 20px;
+    text-align: center;
+
+}

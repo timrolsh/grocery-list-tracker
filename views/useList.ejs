@@ -84,26 +84,35 @@
                     <% } %>
                 </tbody>
             </table>
+            <div class="row"></div>
+            <div class="row" id="reset_all_button">
+                <h1>Empty Shopping Cart</h1>
+            </div>
         </div>
     </body>
     <!-- front end javascript to handle flipping the colors of the buttons and changing their texts when they care clicked on -->
     <script>
+        function flipButtonColor(i) {
+            if (i.style.backgroundColor == "rgb(29, 143, 43)") {
+                i.style.backgroundColor = "rgb(215, 61, 33)";
+                i.innerHTML = "No";
+                return false;
+            }
+            // otherwise, the button must be red, change the color to green and set the text to yes
+            else {
+                i.style.backgroundColor = "rgb(29, 143, 43)";
+                i.innerHTML = "Yes";
+                return true;
+            }
+            return false;
+        }
         for (let i of document.getElementsByClassName("yes-no-button")) {
             i.addEventListener("click", () => {
-                let yes = false;
+                let clickedToYes = flipButtonColor(i);
                 // if the button is green, change the color to red and set the text to no
-                if (i.style.backgroundColor == "rgb(29, 143, 43)") {
-                    i.style.backgroundColor = "rgb(215, 61, 33)";
-                    i.innerHTML = "No";
-                }
-                // otherwise, the button must be red, change the color to green and set the text to yes
-                else {
-                    i.style.backgroundColor = "rgb(29, 143, 43)";
-                    i.innerHTML = "Yes";
-                    yes = true;
-                }
+
                 let requestBody;
-                if (yes) {
+                if (clickedToYes) {
                     requestBody = {
                         charset: "UTF-8",
                         setTo: 1,
@@ -126,6 +135,20 @@
                 });
             });
         }
+
+        document
+            .getElementById("reset_all_button")
+            .addEventListener("click", () => {
+                // set all buttons to No buttons on the screen
+                for (let i of document.getElementsByClassName(
+                    "yes-no-button"
+                )) {
+                    i.style.backgroundColor = "rgb(215, 61, 33)";
+                    i.innerHTML = "No";
+                }
+                // make a get request to server to clear the list
+                fetch(document.URL + "/reset-all");
+            });
     </script>
 
     <!-- materialize stuff -->

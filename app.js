@@ -46,6 +46,14 @@ app.post("/useList/item-in-cart", (req, res) => {
     );
 });
 
+app.get("/useList/reset-all", (req, res) => {
+    db.execute(
+        fs.readFileSync(__dirname + "/db/queries/reset_items_in_cart.sql", {
+            encoding: "UTF-8",
+        })
+    );
+    res.send("items updated");
+});
 
 app.listen(port, () => {
     console.log(

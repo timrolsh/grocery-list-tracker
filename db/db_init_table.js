@@ -1,4 +1,4 @@
-const db = require("./db_connection");
+const db = require("./db_connection_sync");
 const fs = require("fs");
 
 // reset database if there is already something in there
