@@ -19,7 +19,18 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 app.get("/modifyList", (req, res) => {
-    res.render("modifyList");
+    db.execute(
+        fs.readFileSync(__dirname + "/db/queries/read_table.sql", {
+            encoding: "UTF-8",
+        }),
+        (error, results) => {
+            if (error) {
+                res.status(500).send(error); //Internal Server Error
+            } else {
+                res.render("modifyList", { groceryList: results });
+            }
+        }
+    );
 });
 app.get("/useList", (req, res) => {
     db.execute(
@@ -53,6 +64,37 @@ app.get("/useList/reset-all", (req, res) => {
         })
     );
     res.send("items updated");
+});
+
+app.get("/modifyList/clear_shopping_list", (req, res) => {
+    db.execute(
+        fs.readFileSync(__dirname + "/db/queries/empty_shopping_list.sql", {
+            encoding: "UTF-8",
+        })
+    );
+    res.send("shopping list cleared");
+});
+
+app.post("/modifyList/remove-item", (req, res) => {
+    // remove_item_in_cart
+    db.execute(
+        fs.readFileSync(__dirname + "/db/queries/remove_item_in_cart.sql", {
+            encoding: "UTF-8",
+        }),
+        [req.body.id]
+    );
+    res.send("item removed");
+});
+
+app.post("/modifyList/add-item", (req, res) => {
+    // add_data.sql
+    db.execute(
+        fs.readFileSync(__dirname + "/db/queries/add_data.sql", {
+            encoding: "UTF-8",
+        }),
+        [req.body.item_name, req.body.item_count]
+    );
+    res.send("item added");
 });
 
 app.listen(port, () => {

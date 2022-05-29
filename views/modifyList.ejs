@@ -33,33 +33,137 @@
                     >Modify List</a
                 >
             </div>
-            <div class="row"></div>
-            <table class="highlight centered" id="table_body">
-                <caption id="table_header">
-                    Grocery List Items
-                </caption>
+            <h1 class="table_header">
+                Grocery List Items: Click on "remove" to remove the item from
+                the list, or click on "edit" to edit the item in the list!
+            </h1>
+            <table class="centered" id="table_body">
                 <thead>
-                    <tr>
-                        <th>Item Name</th>
-                        <th>Item Count</th>
+                    <tr class="row table_header">
+                        <th class="col s3" style="padding: 12px">Item Name</th>
+                        <th class="col s3" style="padding: 12px">Item Count</th>
+                        <th class="col s3" style="padding: 12px">
+                            Edit Button
+                        </th>
+                        <th class="col s3" style="padding: 12px">
+                            Remove Button
+                        </th>
                     </tr>
                 </thead>
-                <!-- getting error here, idk why -->
-                <tbody id="list_table_body"></tbody>
+                <tbody id = "inner_table_body">
+                    <!-- add the rows of the table in here. Each row has 3 columns, each column is the item name, the item count, and whether the item is in the list or not  -->
+                    <% for (let item of groceryList) { %>
+                    <tr class="row" id="row<%= item.item_id%>">
+                        <td class="col s3" style="padding: 12px">
+                            <%= item.item_name %>
+                        </td>
+                        <td class="col s3" style="padding: 12px">
+                            <%= item.item_count %>
+                        </td>
+                        <td
+                            class="col s3"
+                            style="
+                                padding: 12px;
+                                background-color: rgb(37, 223, 211);
+                            "
+                        >
+                            Edit
+                        </td>
+                        <td
+                            class="col s3 remove_button"
+                            style="
+                                padding: 12px;
+                                background-color: rgb(215, 61, 33);
+                            "
+                            id="<%= item.item_id %>"
+                        >
+                            Remove
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
             </table>
-            <hr id="modify_list_divider" />
-            <div class="row">
+
+            <div class="row" style="padding: 24px; background-color: gray">
                 <input
-                    placeholder="Enter item here "
-                    id="add_item_text"
+                    placeholder="New item name"
+                    id="new_item_name"
                     type="text"
-                    class="validate col s9"
+                    class="col s6"
+                    style="color: black; font-size: 20px"
                 />
-                <a class="waves-effect waves-light btn col s3">Add item</a>
+                <input
+                    placeholder="New item count"
+                    id="new_item_count"
+                    type="text"
+                    class="col s3"
+                    style="color: black; font-size: 20px"
+                />
+                <a
+                    class="col s3"
+                    style="
+                        text-align: center;
+                        background-color: rgb(13, 121, 63);
+                        color: black;
+                        font-size: 20px;
+                        padding: 12px;
+                    "
+                    id="add_item_button"
+                    >Add item</a
+                >
+            </div>
+            <div class="row"></div>
+            <div class="row" id="clear_shopping_list_button">
+                <h1>Clear Shopping List</h1>
             </div>
         </div>
     </body>
-    
+
+    <!-- frontend javascript which will handle removing items, editing items, adding items, and clearing items from the shopping list -->
+    <script>
+        // listener for clear shopping list button, server will just reload the page
+        document
+            .getElementById("clear_shopping_list_button")
+            .addEventListener("click", () => {
+                fetch(document.URL + "/clear_shopping_list");
+                // not all rows in table get cleared for some reason and since everything is gone anyway, you can just refresh the page
+                location.reload();
+            });
+        // listeners for all of the remove buttons
+        for (let element of document.getElementsByClassName("remove_button")) {
+            element.addEventListener("click", () => {
+                fetch(document.URL + "/remove-item", {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                    body: JSON.stringify({ id: element.id }),
+                });
+                document.getElementById("row" + element.id).remove();
+            });
+        }
+        // listener for adding an item
+        document
+            .getElementById("add_item_button")
+            .addEventListener("click", () => {
+                // post request to server to add element
+                fetch(document.URL + "/add-item", {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        item_name:
+                            document.getElementById("new_item_name").value,
+                        item_count:
+                            document.getElementById("new_item_count").value,
+                    }),
+                });
+                // no way to know what ID the DB is going to make for this new item, so we have to refresh the page
+                location.reload();
+            });
+        // listeners for editing items
+    </script>
 
     <!-- materialize stuff -->
     <link rel="stylesheet" href="stylesheets/materialize.min.css" />

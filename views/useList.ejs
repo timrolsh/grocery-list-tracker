@@ -33,7 +33,7 @@
                     >Modify List</a
                 >
             </div>
-            <h1 class="table_header">Grocery List Items</h1>
+            <h1 class="table_header">Grocery List Items: Check off items that are already in the cart! If you lose track, click the "Empty shopping Cart" button and reset them all!</h1>
             <table class="highlight centered" id="table_body">
                 <thead>
                     <tr class="row table_header">
@@ -44,10 +44,10 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="list_table_body">
+                <tbody>
                     <!-- add the rows of the table in here. Each row has 3 columns, each column is the item name, the item count, and whether the item is in the list or not  -->
                     <% for (let item of groceryList) { %>
-                    <tr class="row" id="row<%= item.item_id %>">
+                    <tr class="row">
                         <td class="col s4" style="padding: 12px">
                             <%= item.item_name %>
                         </td>

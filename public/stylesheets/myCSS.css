@@ -44,5 +44,11 @@ body {
     background-color: rgb(214, 49, 49);
     font-size: 20px;
     text-align: center;
+}
 
+#clear_shopping_list_button {
+    padding: 2px;
+    background-color: rgb(214, 49, 49);
+    font-size: 20px;
+    text-align: center;
 }

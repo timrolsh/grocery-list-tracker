@@ -1,1 +1,4 @@
-select * from grocery_list;
+select
+    *
+from
+    grocery_list;
