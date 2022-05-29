@@ -97,6 +97,32 @@ app.post("/modifyList/add-item", (req, res) => {
     res.send("item added");
 });
 
+app.get("/modifyList/editItem:id", (req, res) => {
+    db.execute(
+        fs.readFileSync(__dirname + "/db/queries/read_item_from_list.sql", {
+            encoding: "UTF-8",
+        }),
+        [parseInt(req.params.id.substring(1))],
+        (error, results) => {
+            if (error) {
+                res.status(500).send(error); //Internal Server Error
+            } else {
+                res.render("editItem", { item: results[0] });
+            }
+        }
+    );
+});
+
+app.post("/modifyList/editItem", (req, res) => {
+    db.execute(
+        fs.readFileSync(__dirname + "/db/queries/update_item.sql", {
+            encoding: "UTF-8",
+        }),
+        [req.body.item_name, req.body.item_count, req.body.item_id]
+    );
+    res.send("item updated");
+});
+
 app.listen(port, () => {
     console.log(
         `App server listening on ${port}. (Go to http://localhost:${port})`

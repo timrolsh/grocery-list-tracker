@@ -61,11 +61,12 @@
                             <%= item.item_count %>
                         </td>
                         <td
-                            class="col s3"
+                            class="col s3 edit_button"
                             style="
                                 padding: 12px;
                                 background-color: rgb(37, 223, 211);
                             "
+                            id = "edit<%= item.item_id%>"
                         >
                             Edit
                         </td>
@@ -99,7 +100,7 @@
                     class="col s3"
                     style="color: black; font-size: 20px"
                 />
-                <a
+                <div
                     class="col s3"
                     style="
                         text-align: center;
@@ -109,7 +110,7 @@
                         padding: 12px;
                     "
                     id="add_item_button"
-                    >Add item</a
+                    >Add item</div
                 >
             </div>
             <div class="row"></div>
@@ -163,11 +164,16 @@
                 location.reload();
             });
         // listeners for editing items
+        for (let element of document.getElementsByClassName("edit_button")) {
+            element.addEventListener("click", () => {
+                location.assign(document.URL + "/editItem:" + element.id.substring(4));
+            });
+        }
     </script>
 
     <!-- materialize stuff -->
-    <link rel="stylesheet" href="stylesheets/materialize.min.css" />
-    <script src="javascripts/materialize.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/materialize.min.css" />
+    <script src="/javascripts/materialize.min.js"></script>
     <!-- my own css -->
     <link rel="stylesheet" href="/stylesheets/myCSS.css" />
 </html>

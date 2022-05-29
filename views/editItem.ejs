@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Grocery List Tracker - Edit Item</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Raleway:ital,wght@1,300&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+
+    <body>
+        <div class="container">
+            <h1 class="mainHeader">Tim's Grocery List Tracker</h1>
+            <h2 class="tanle_header" style="text-align: center">
+                Editing <%= item.item_name %>
+            </h2>
+            <div class="row" style="padding: 24px; background-color: gray">
+                <input
+                    placeholder="<%= item.item_name%>"
+                    id="edited_item_name"
+                    type="text"
+                    class="col s6"
+                    style="color: black; font-size: 20px"
+                />
+                <input
+                    placeholder="<%= item.item_count%>"
+                    id="edited_item_count"
+                    type="text"
+                    class="col s3"
+                    style="color: black; font-size: 20px"
+                />
+                <div
+                    class="col s3"
+                    style="
+                        text-align: center;
+                        background-color: rgb(13, 121, 63);
+                        color: black;
+                        font-size: 20px;
+                        padding: 12px;
+                    "
+                    id="edit_button"
+                >
+                    Edit Item
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        document
+            .getElementById("edit_button")
+            .addEventListener("click", () => {
+                fetch("/modifyList/editItem", {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        item_id: document.URL.substring(
+                            document.URL.lastIndexOf(":") + 1
+                        ),
+                        item_name:
+                            document.getElementById("edited_item_name").value,
+                        item_count:
+                            document.getElementById("edited_item_count").value,
+                    }),
+                });
+                location.assign("/modifyList");
+            });
+    </script>
+
+    <!-- materialize stuff -->
+    <link rel="stylesheet" href="/stylesheets/materialize.min.css" />
+    <script src="/javascripts/materialize.min.js"></script>
+
+    <!-- my own css -->
+    <link rel="stylesheet" href="/stylesheets/myCSS.css" />
+</html>
