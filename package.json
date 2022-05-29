@@ -4,7 +4,10 @@
     "description": "A website that makes it really easy to make a grocery list and check stuff off while you are at the grocery store!",
     "main": "app.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app.js",
+        "devstart": "nodemon -e js,ejs,sql,env app.js",
+        "resetDB": "node db/db_init_table.js"
     },
     "repository": {
         "type": "git",
@@ -18,6 +21,7 @@
     "homepage": "https://github.com/timrolsh/grocery-list-tracker#readme",
     "dependencies": {
         "dotenv": "^16.0.0",
+        "ejs": "^3.1.8",
         "express": "^4.17.3",
         "fs": "^0.0.1-security",
         "morgan": "^1.10.0",

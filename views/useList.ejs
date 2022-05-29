@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Grocery List Tracker - Use List</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Raleway:ital,wght@1,300&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+
+    <body>
+        <div class="container">
+            <h1 class="mainHeader">Tim's Grocery List Tracker</h1>
+            <div class="row">
+                <a
+                    class="waves-effect waves-light btn-large col s4 buttonColor"
+                    href="/"
+                    >Home</a
+                >
+                <a
+                    class="waves-effect waves-light btn-large col s4 buttonColor"
+                    href="/useList"
+                    >Use List</a
+                >
+                <a
+                    class="waves-effect waves-light btn-large col s4 buttonColor"
+                    href="/modifyList"
+                    >Modify List</a
+                >
+            </div>
+            <h1 class="table_header">Grocery List Items: Check off items that are already in the cart! If you lose track, click the "Empty shopping Cart" button and reset them all!</h1>
+            <table class="highlight centered" id="table_body">
+                <thead>
+                    <tr class="row table_header">
+                        <th class="col s4" style="padding: 12px">Item Name</th>
+                        <th class="col s4" style="padding: 12px">Item Count</th>
+                        <th class="col s4" style="padding: 12px">
+                            In Shopping Cart
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- add the rows of the table in here. Each row has 3 columns, each column is the item name, the item count, and whether the item is in the list or not  -->
+                    <% for (let item of groceryList) { %>
+                    <tr class="row">
+                        <td class="col s4" style="padding: 12px">
+                            <%= item.item_name %>
+                        </td>
+                        <td class="col s4" style="padding: 12px">
+                            <%= item.item_count %>
+                        </td>
+                        <!-- don't display the number 1 or 0, display yes or no -->
+                        <!-- TODO make these buttons that user can click to flip them back and forth from yes or no, and every time button is clicked, update value in database -->
+                        <% if (item.item_in_cart==1) { %>
+                        <td
+                            class="col s4 yes-no-button"
+                            style="
+                                padding: 12px;
+                                background-color: rgb(29, 143, 43);
+                            "
+                            id="<%= item.item_id %>"
+                        >
+                            Yes
+                            <a href=""></a>
+                        </td>
+                        <% } else { %>
+                        <td
+                            class="col s4 yes-no-button"
+                            style="
+                                padding: 12px;
+                                background-color: rgb(215, 61, 33);
+                            "
+                            id="<%= item.item_id %>"
+                        >
+                            No
+                        </td>
+                        <% } %>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <div class="row"></div>
+            <div class="row" id="reset_all_button">
+                <h1>Empty Shopping Cart</h1>
+            </div>
+        </div>
+    </body>
+    <!-- front end javascript to handle flipping the colors of the buttons and changing their texts when they care clicked on -->
+    <script>
+        function flipButtonColor(i) {
+            if (i.style.backgroundColor == "rgb(29, 143, 43)") {
+                i.style.backgroundColor = "rgb(215, 61, 33)";
+                i.innerHTML = "No";
+                return false;
+            }
+            // otherwise, the button must be red, change the color to green and set the text to yes
+            else {
+                i.style.backgroundColor = "rgb(29, 143, 43)";
+                i.innerHTML = "Yes";
+                return true;
+            }
+            return false;
+        }
+        for (let i of document.getElementsByClassName("yes-no-button")) {
+            i.addEventListener("click", () => {
+                let clickedToYes = flipButtonColor(i);
+                // if the button is green, change the color to red and set the text to no
+
+                let requestBody;
+                if (clickedToYes) {
+                    requestBody = {
+                        charset: "UTF-8",
+                        setTo: 1,
+                        id: i.id,
+                    };
+                } else {
+                    requestBody = {
+                        charset: "UTF-8",
+                        setTo: 0,
+                        id: i.id,
+                    };
+                }
+
+                fetch(document.URL + "/item-in-cart", {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                    body: JSON.stringify(requestBody),
+                });
+            });
+        }
+
+        document
+            .getElementById("reset_all_button")
+            .addEventListener("click", () => {
+                // set all buttons to No buttons on the screen
+                for (let i of document.getElementsByClassName(
+                    "yes-no-button"
+                )) {
+                    i.style.backgroundColor = "rgb(215, 61, 33)";
+                    i.innerHTML = "No";
+                }
+                // make a get request to server to clear the list
+                fetch(document.URL + "/reset-all");
+            });
+    </script>
+
+    <!-- materialize stuff -->
+    <link rel="stylesheet" href="/stylesheets/materialize.min.css" />
+    <script src="/javascripts/materialize.min.js"></script>
+    <!-- my own css -->
+    <link rel="stylesheet" href="/stylesheets/myCSS.css" />
+</html>
